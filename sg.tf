@@ -89,3 +89,9 @@ resource "aws_security_group" "rds_sg" {
 
   tags = { Name = "rds-sg" }
 }
+ingress {
+  from_port       = 22
+  to_port         = 22
+  protocol        = "tcp"
+  security_groups = [aws_security_group.bastion_sg.id]
+}
