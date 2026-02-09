@@ -3,7 +3,7 @@ resource "aws_launch_template" "wordpress" {
   image_id      = "ami-0d593311db5abb72b"
   instance_type = "t2.micro"
   
-  key_name = var.key_name
+  key_name = "vockey"
 
   user_data = base64encode(file("userdata.sh"))
 
@@ -17,5 +17,12 @@ resource "aws_launch_template" "wordpress" {
     tags = {
       Name = "wordpress-asg"
     }
+  }
+}
+tag_specifications {
+  resource_type = "instance"
+  tags = {
+    Name    = "wordpress-asg"
+    Version = "v2"
   }
 }
